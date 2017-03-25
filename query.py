@@ -52,17 +52,26 @@ q3 = Model.query.filter(Model.year < 1960).all()
 q4 =  Brand.query.filter(Brand.founded > 1920).all()
 
 # Get all models with names that begin with ``Cor``.
-q5 = None
+q5 = Model.query.filter(Model.name.like ('Cor%')).all()
+# I also tried this query 
+# Model.query.filter(Model.name.like ('%Cor%')).all()
+# and got the same results but think that what I submitted
+# is more accurate as there could be a brand that had two names
+# and the second name starts with Cor which will not be the 
+# right result.
 
 # Get all brands that were founded in 1903 and that are not yet discontinued.
-q6 = None
+q6 = Brand.query.filter(Brand.founded == 1903, Brand.discontinued = None).all()
 
 # Get all brands that are either 1) discontinued (at any time) or 2) founded
 # before 1950.
-q7 = None
+q7 = Brand.query.filter(db.or_(Brand.discontinued != None, Brand.founded < 1950)).all()
 
 # Get all models whose brand_id is not ``for``.
-q8 = None
+q8 = Model.query.filter(Model.brand_id != 'for').all()
+# alternative 
+# Model.query.filter(db.not_(Model.brand_id == 'for')).all()
+# I found this more complex
 
 
 
