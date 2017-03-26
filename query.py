@@ -8,7 +8,7 @@ explanations of the assignment.
 All classes from model.py are being imported for you
 here, so feel free to refer to classes without the
 [model.]User prefix.
-
+mo
 """
 
 from model import *
@@ -61,7 +61,7 @@ q5 = Model.query.filter(Model.name.like ('Cor%')).all()
 # right result.
 
 # Get all brands that were founded in 1903 and that are not yet discontinued.
-q6 = Brand.query.filter(Brand.founded == 1903, Brand.discontinued = None).all()
+q6 = Brand.query.filter(Brand.founded == 1903, Brand.discontinued == None).all()
 
 # Get all brands that are either 1) discontinued (at any time) or 2) founded
 # before 1950.
@@ -83,7 +83,12 @@ def get_model_info(year):
     """Takes in a year and prints out each model name, brand name, and brand
     headquarters for that year using only ONE database query."""
 
-    pass
+    brand_model_info = db.session.query(Brand, Model).all()
+
+    for brand, model in brand_model_info:
+        if model.year == year:
+            print "In the year %d, %s based in %s produced the model %s." \
+            % (year, brand.name, brand.headquarters, model.name) 
 
 
 def get_brands_summary():
@@ -97,12 +102,15 @@ def search_brands_by_name(mystr):
     """Returns all Brand objects corresponding to brands whose names include
     the given string."""
 
-    pass
+    brand_name = Brand.query.filter(Brand.name == mystr).all()
+    return brand_name
 
 
 def get_models_between(start_year, end_year):
     """Returns all Model objects corresponding to models made between
     start_year (inclusive) and end_year (exclusive)."""
 
-    pass
-
+    
+    models = Model.query.filter(Model.year >= start_year, Model.year < end_year).all()
+    return models
+ 

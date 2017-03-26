@@ -7,8 +7,6 @@ from flask_sqlalchemy import SQLAlchemy
 # object, where we do most of our interactions (like committing, etc.)
 
 db = SQLAlchemy()
-# Test relationship
-# check nullable versus not null
 
 ##############################################################################
 # Part 1: Compose ORM
