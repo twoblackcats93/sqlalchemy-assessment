@@ -87,7 +87,7 @@ def get_model_info(year):
 
     for brand, model in brand_model_info:
         if model.year == year:
-            print "In the year %d, %s based in %s produced the model %s." \
+            print "In the year %d, %s, based in %s produced the model %s." \
             % (year, brand.name, brand.headquarters, model.name) 
 
 
@@ -95,6 +95,11 @@ def get_brands_summary():
     """Prints out each brand name (once) and all of that brand's models,
     including their year, using only ONE database query."""
 
+    # create empty dictionary
+    # create query that produces tuples
+    # loop through tuples and using index
+    # check if brand.name is in dict key, if not, add
+    # add the values, need to figure out how to do this
     pass
 
 
