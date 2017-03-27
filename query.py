@@ -82,26 +82,38 @@ q8 = Model.query.filter(Model.brand_id != 'for').all()
 def get_model_info(year):
     """Takes in a year and prints out each model name, brand name, and brand
     headquarters for that year using only ONE database query."""
-
+    
+    # query both Brand and Model classes, get a list of tuples
     brand_model_info = db.session.query(Brand, Model).all()
 
+    # loop through tuples and get the brand name, HQ, model for a given year
     for brand, model in brand_model_info:
         if model.year == year:
             print "In the year %d, %s, based in %s produced the model %s." \
             % (year, brand.name, brand.headquarters, model.name) 
 
 
-def get_brands_summary():
-    """Prints out each brand name (once) and all of that brand's models,
-    including their year, using only ONE database query."""
+# def get_brands_summary():
+#     """Prints out each brand name (once) and all of that brand's models,
+#     including their year, using only ONE database query."""
+    
+#     # create empty dictionary
+#     brands_summary = {}
+    
+#     # create query that produces tuples
+#     brand_model_year = db.session.query(Brand.name, Model.name, Model.year).all()
+    
+#     # # loop through tuples and set dict key and values
+#     # for items in brand_model_year:
+#     #     dict_key = items[0]
+#     #     dict_value = (items[1], items[2])
 
-    # create empty dictionary
-    # create query that produces tuples
-    # loop through tuples and using index
-    # check if brand.name is in dict key, if not, add
-    # add the values, need to figure out how to do this
-    pass
-
+#     #     if dict_key not in brands_summary:
+#     #         brands_summary[dict_key] = []
+#     #     else:
+#     #         brands_summary[dict_key].append(dict_value)      
+    
+#     # return brands_summary
 
 def search_brands_by_name(mystr):
     """Returns all Brand objects corresponding to brands whose names include
